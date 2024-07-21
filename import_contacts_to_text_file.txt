@@ -1,0 +1,3 @@
+name: John Doe, phone number: 213-456-7654, email address: johndoe@gmail.com, additional information: N/A
+name: Jack, phone number: 481-516-2342, email address: jack@yahoo.com, additional information: this is a lost reference, sorry
+name: Charlie, phone number: 653-789-2134, emailaddress: driveshaft@info.com, additional information: also a lost reference
