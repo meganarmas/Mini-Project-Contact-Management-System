@@ -35,15 +35,15 @@ def editing_contact(contact_infos):
             elif choice == '4':
                 additional_info = input("Enter new additional information: ")
                 contact_infos[contact[name]]["additional information"] = additional_info
-    else:
-        print("Contact not found.")
+            else:
+                print("Contact not found.")
 
 def delete_contact(contact_infos):
     remove_contact = input("What is the name of the contact you would like to delete: ")
     contact_names = [{entry["name"]: contact_infos.index(entry)} for entry in contact_infos]
     for contact in contact_names:
         if remove_contact in contact:
-            remove_contact = contact.pop
+            del contact
             print("Contact was deleted.")
         else:
             print("User was not found.")
@@ -64,16 +64,16 @@ def display_contacts(contact_infos):
     if not contact_infos:
         print("No contacts found.")
 
-def export_contacts(file, contact_infos):
+def export_contacts(filename):
     try:
         with open('export_file.txt', 'w') as file:
-            for contact in contact_infos:
+            for contact in contact_infos.index():
                 file.write(f"{contact}")
                 print("Contact export completed.")
     except FileNotFoundError:
         print("Error in file. Please check the file before continuing.")
 
-def import_contacts(file):
+def import_contacts(filename):
     try:
         with open('import_contacts.txt', 'r') as file:
             for line in file:
@@ -87,7 +87,7 @@ def import_contacts(file):
 
 def main():
     while True:
-        print("Welcome to the Contact Management System! \n Menu")
+        print("Welcome to the Contact Management System! \nMenu")
         print("1. Add a new contact.")
         print("2. Edit an existing contact.")
         print("3. Delete a contact.")
@@ -111,9 +111,9 @@ def main():
         elif choice == '5':
             display_contacts(contact_infos)
         elif choice == '6':
-            export_contacts()
+            export_contacts(filename)
         elif choice == '7':
-            import_contacts()
+            import_contacts(filename)
         elif choice == '8':
             print("Thank you for using the Contact Management System! Closing now.")
             break
