@@ -20,5 +20,3 @@ To search for a contact, type and '4' and look them up via their email address. 
 To export and import contacts, type in '6' and '7' respectively. The text files are already included in this program with export_file.txt and import_contacts.txt.
 
 By hitting '8' for quit, you will exit out of the program.
-
-*will do later.
