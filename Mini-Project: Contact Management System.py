@@ -31,10 +31,10 @@ def editing_contact(contact_infos):
                 contact_infos[contact[name]]["phone number"] = contact_number
             elif choice == '3':
                 contact_email = input("Enter contact's new email: ")
-                contact_infos[contact[name]]["email address"] = contact_email
+                contact_infos[contact[name]]["email"] = contact_email
             elif choice == '4':
                 additional_info = input("Enter new additional information: ")
-                contact_infos[contact[name]]["additional information"] = additional_info
+                contact_infos[contact[name]]["additonal information"] = additional_info
             else:
                 print("Contact not found.")
 
@@ -43,16 +43,16 @@ def delete_contact(contact_infos):
     contact_names = [{entry["name"]: contact_infos.index(entry)} for entry in contact_infos]
     for contact in contact_names:
         if remove_contact in contact:
-            del contact
+            del contact_infos
             print("Contact was deleted.")
         else:
             print("User was not found.")
 
 def search_contact(contact_infos):
         email_address = input("Insert email address to search for contact: ")
-        email_address = re.findall(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", contact_infos.index)
+        email_address = re.findall(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", contact_infos.index())
         if email_address in contact_infos:
-            print(f"{contact_infos.index}")
+            print(f"{contact_infos}")
         else:
             print("Contact not found.")
 
@@ -60,26 +60,29 @@ def display_contacts(contact_infos):
     for contact in contact_infos:
         print(f"Name: {contact["name"]}")
         print(f"Phone number: {contact["phone number"]}")
-        print(f"Email: {contact["email address"]}")
+        print(f"Email: {contact["email"]}")
+        print(f"Additional information: {contact["additonal information"]}")
     if not contact_infos:
         print("No contacts found.")
 
-def export_contacts(filename):
+def export_contacts():
     try:
         with open('export_file.txt', 'w') as file:
-            for contact in contact_infos.index():
-                file.write(f"{contact}")
+                file.write(f"{contact_infos.index()}")
                 print("Contact export completed.")
+                file.close()
     except FileNotFoundError:
         print("Error in file. Please check the file before continuing.")
 
-def import_contacts(filename):
+def import_contacts():
+    global contact_infos
     try:
         with open('import_contacts.txt', 'r') as file:
             for line in file:
                 contact_name, contact_number, contact_email, additonal_information = line.strip().split(',')
                 contact_infos.index = {"name": contact_name, "phone number": contact_number, "email": contact_email, "additonal information": additonal_information}
                 print("Contacts imported completed.")
+                file.close()
     except FileNotFoundError:
         print("Import file not found.")
     except FileExistsError:
@@ -111,9 +114,9 @@ def main():
         elif choice == '5':
             display_contacts(contact_infos)
         elif choice == '6':
-            export_contacts(filename)
+            export_contacts()
         elif choice == '7':
-            import_contacts(filename)
+            import_contacts()
         elif choice == '8':
             print("Thank you for using the Contact Management System! Closing now.")
             break
